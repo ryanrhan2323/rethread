@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Listing Detail
+  body
+    h1 Listing Detail
+    h2= listing.title
+    p
+      | Description: #{listing.description}
+    p
+      | Category: #{listing.category}
+    p
+      | Status: #{listing.status}
+    p
+      | Image: #{listing.image_url}

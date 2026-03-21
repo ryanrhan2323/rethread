@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title Listings
+  body
+    h1 Repair Listings
+
+    ul
+      each item in listings
+        li
+          a(href=`/listing/${item.request_id}`) #{item.title}
+          |  - #{item.category} - #{item.status}
+          
