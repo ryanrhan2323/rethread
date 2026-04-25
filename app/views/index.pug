@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title ReThread Home
+    link(rel="stylesheet", href="/style.css")
+  body
+    include nav
+
+    .container
+      .hero
+        h1 ReThread
+        p Repair your clothes easily. Find trusted menders or post your own request.
+
+        if currentUser
+          p
+            strong Logged in as:
+            |  #{currentUser.name} (#{currentUser.role})
+        else
+          p Please login or register to start using the platform.
+
+        br
+
+        // Основные кнопки
+        a.button(href="/listings") View Listings
+
+        if currentUser && currentUser.role === "customer"
+          a.button(href="/add-request") + Add Request
+
+        if !currentUser
+          a.secondary-button(href="/register") Get Started
+
+      // Дополнительные блоки (делает страницу не пустой)
+      .grid
+        .card
+          h3 Browse Requests
+          p See all repair requests posted by customers.
+          a.button(href="/listings") Open Listings
+
+        .card
+          h3 Find Menders
+          p Explore users who can repair your items.
+          a.button(href="/menders") View Menders
+
+        .card
+          h3 View Users
+          p Browse all registered users on the platform.
+          a.button(href="/users") All Users

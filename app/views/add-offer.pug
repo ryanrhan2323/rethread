@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Add Offer
+    link(rel="stylesheet", href="/style.css")
+  body
+    include nav
+
+    .container
+      .card.form-card
+        h2 Add Offer
+
+        if currentUser
+          p.meta Logged in as #{currentUser.name}
+
+        form(action="/add-offer" method="POST")
+          input(type="hidden", name="request_id", value=requestId)
+
+          label(for="price") Price
+          input(type="number", name="price", id="price", placeholder="Price", required)
+
+          label(for="message") Message
+          textarea(name="message", id="message", placeholder="Describe your offer", required)
+
+          button.button(type="submit") Submit

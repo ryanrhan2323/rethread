@@ -2,12 +2,35 @@ doctype html
 html
   head
     title Listings
+    link(rel="stylesheet", href="/style.css")
   body
-    h1 Repair Listings
+    include nav
 
-    ul
-      each item in listings
-        li
-          a(href=`/listing/${item.request_id}`) #{item.title}
-          |  - #{item.category} - #{item.status}
-          
+    .container
+      h2.section-title Repair Requests
+
+      if currentUser && currentUser.role === "customer"
+        a.button(href="/add-request") + Add Request
+
+      - const list = listings || []
+
+      if list.length
+        .grid
+          - for (let i = 0; i < list.length; i++)
+            .card
+              if list[i].image_url
+                img(src=`/images/${list[i].image_url}` style="width:100%; height:200px; object-fit:cover; border-radius:10px;")
+
+              h3
+                a(href=`/listing/${list[i].request_id}`) #{list[i].title}
+
+              p
+                strong Customer:
+                |  #{list[i].customer_name}
+
+              p(class=`status-${list[i].status}`)
+                | Status: #{list[i].status}
+
+              a.button(href=`/listing/${list[i].request_id}`) View
+      else
+        .empty-state No repair requests available

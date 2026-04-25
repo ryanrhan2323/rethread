@@ -1,0 +1,14 @@
+nav
+  a(href="/") Home
+  a(href="/users") Users
+  a(href="/customers") Customers
+  a(href="/menders") Menders
+  a(href="/listings") Listings
+
+  if currentUser
+    span Logged in as #{currentUser.name}
+    a(href=`/profile/${currentUser.user_id}`) My Profile
+    a(href="/logout") Logout
+  else
+    a(href="/login") Login
+    a(href="/register") Register

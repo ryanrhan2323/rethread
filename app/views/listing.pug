@@ -1,15 +1,51 @@
 doctype html
 html
   head
-    title Listing Detail
+    title Listing
+    link(rel="stylesheet", href="/style.css")
   body
-    h1 Listing Detail
-    h2= listing.title
-    p
-      | Description: #{listing.description}
-    p
-      | Category: #{listing.category}
-    p
-      | Status: #{listing.status}
-    p
-      | Image: #{listing.image_url}
+    include nav
+
+    .container
+      .card
+        h2= listing.title
+
+        if listing.image_url
+          img.detail-image(src=`/images/${listing.image_url}`, alt=listing.title)
+
+        p #{listing.description}
+        p Category: #{listing.category}
+        p(class=`status-${listing.status}`) Status: #{listing.status}
+        p Customer: #{listing.customer_name}
+
+        if currentUser && currentUser.role === "mender"
+          a.button(href=`/add-offer/${listing.request_id}`) Add Offer
+
+      h3 Offers
+
+      - const list = offers || []
+
+      if list.length
+        .grid
+          - for (let i = 0; i < list.length; i++)
+            - const canAccept = currentUser && (currentUser.role === "admin" || currentUser.user_id === listing.user_id)
+            - const canDeleteOffer = currentUser && (currentUser.role === "admin" || currentUser.user_id === list[i].mender_id || currentUser.user_id === listing.user_id)
+
+            .card
+              h3 #{list[i].mender_name}
+              p Price: £#{list[i].price}
+              p #{list[i].message}
+              p(class=`status-${list[i].status}`) Status: #{list[i].status}
+
+              if canAccept
+                a.button(href=`/accept-offer/${list[i].offer_id}/${listing.request_id}`) Accept
+
+              if canDeleteOffer
+                a.secondary-button(href=`/delete-offer/${list[i].offer_id}/${listing.request_id}`) Delete Offer
+      else
+        .empty-state No offers yet
+
+      - const canDeleteRequest = currentUser && (currentUser.role === "admin" || currentUser.user_id === listing.user_id)
+
+      if canDeleteRequest
+        a.secondary-button(href=`/delete-request/${listing.request_id}`) Delete Request

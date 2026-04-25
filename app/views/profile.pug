@@ -2,10 +2,77 @@ doctype html
 html
   head
     title Profile
+    link(rel="stylesheet", href="/style.css")
   body
-    h1 User Profile
-    h2= user.name
-    p
-      | Email: #{user.email}
-    p
-      | Role: #{user.role}
+    include nav
+
+    .container
+      .card
+        if user.avatar
+          img(src=`/images/avatars/${user.avatar}` style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:10px;")
+
+        h2 #{user.name}
+
+        p
+          strong Role:
+          |  #{user.role}
+
+        if user.email
+          p.meta #{user.email}
+
+      if currentUser && currentUser.user_id === user.user_id
+        h3 Change Avatar
+
+        .grid
+          .card
+            img(src="/images/avatars/avatar1.png" style="width:60px; height:60px; border-radius:50%; object-fit:cover;")
+            br
+            a.button(href="/change-avatar/avatar1.png") Select
+
+          .card
+            img(src="/images/avatars/avatar2.png" style="width:60px; height:60px; border-radius:50%; object-fit:cover;")
+            br
+            a.button(href="/change-avatar/avatar2.png") Select
+
+          .card
+            img(src="/images/avatars/avatar3.png" style="width:60px; height:60px; border-radius:50%; object-fit:cover;")
+            br
+            a.button(href="/change-avatar/avatar3.png") Select
+
+          .card
+            img(src="/images/avatars/avatar4.png" style="width:60px; height:60px; border-radius:50%; object-fit:cover;")
+            br
+            a.button(href="/change-avatar/avatar4.png") Select
+
+      if user.role === "customer"
+        h3 Your Requests
+
+        - const list = data || []
+
+        if list.length
+          .grid
+            - for (let i = 0; i < list.length; i++)
+              .card
+                h3
+                  a(href=`/listing/${list[i].request_id}`) #{list[i].title}
+                p Status: #{list[i].status}
+        else
+          .empty-state You have no requests yet
+
+      if user.role === "mender"
+        h3 Your Offers
+
+        - const list = data || []
+
+        if list.length
+          .grid
+            - for (let i = 0; i < list.length; i++)
+              .card
+                h3 #{list[i].title}
+                p Price: £#{list[i].price}
+                p Status: #{list[i].status}
+        else
+          .empty-state You have not made any offers yet
+
+      if user.role === "admin"
+        .empty-state This is an admin account

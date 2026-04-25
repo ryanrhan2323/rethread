@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Login
+    link(rel="stylesheet", href="/style.css")
+  body
+    include nav
+
+    .container
+      .card.form-card
+        h2 Login
+
+        form(action="/login" method="POST")
+          label(for="email") Email
+          input(type="email", name="email", id="email", placeholder="Email", required)
+
+          label(for="password") Password
+          input(type="password", name="password", id="password", placeholder="Password", required)
+
+          button.button(type="submit") Login

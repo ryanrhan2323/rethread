@@ -40,21 +40,36 @@ CREATE TABLE offers (
 
 INSERT INTO users (name, email, password, role) VALUES
 ('Roman Admin', 'admin@example.com', '123456', 'admin'),
-('Anna Customer', 'anna@example.com', '123456', 'customer'),
-('Mark Mender', 'mark@example.com', '123456', 'mender');
+('Liam O''Connor', 'liam.oconnor@gmail.com', '123456', 'customer'),
+('Olivia Smith', 'olivia.smith@gmail.com', '123456', 'customer'),
+('Jack Williams', 'jack.williams@gmail.com', '123456', 'customer'),
+('Chloe Brown', 'chloe.brown@gmail.com', '123456', 'customer'),
+('Noah Taylor', 'noah.taylor@gmail.com', '123456', 'customer'),
+('Emily Wilson', 'emily.wilson@gmail.com', '123456', 'customer'),
+('Mark Mender', 'mark@rethread.com', '123456', 'mender'),
+('Sarah Tailor', 'sarah@rethread.com', '123456', 'mender'),
+('Daniel Stitch', 'daniel@rethread.com', '123456', 'mender');
 
 INSERT INTO categories (category_name) VALUES
 ('Jackets'),
+('Coats'),
 ('Trousers'),
-('Shoes'),
-('Dresses');
+('Shirts'),
+('Skirts'),
+('Shoes');
 
 INSERT INTO repairrequests (user_id, title, description, category, image_url, status) VALUES
-(2, 'Fix jacket zipper', 'The front zipper is broken and needs replacement.', 'Jackets', 'jacket.jpg', 'open'),
-(2, 'Shorten trousers', 'Need to shorten the length of formal trousers.', 'Trousers', 'trousers.jpg', 'in_progress'),
-(2, 'Repair shoe sole', 'The sole is coming off and needs to be glued properly.', 'Shoes', 'shoes.jpg', 'completed');
+(2, 'Denim jacket sleeve repair', 'Torn denim jacket sleeve needs stitching and patch repair.', 'Jackets', 'jacket1.jpg', 'open'),
+(3, 'Winter coat zipper replacement', 'Zipper of winter coat is broken and needs replacement.', 'Coats', 'coat1.jpg', 'in_progress'),
+(4, 'Formal trousers adjustment', 'Formal trousers require waist adjustment and hemming.', 'Trousers', 'trousers1.jpg', 'open'),
+(5, 'Shirt button replacement', 'The shirt has missing buttons and needs fixing.', 'Shirts', 'shirt1.jpg', 'completed'),
+(6, 'Leather jacket lining repair', 'Leather jacket has a ripped lining and needs inner repair.', 'Jackets', 'jacket2.jpg', 'open'),
+(7, 'Skirt resizing and tear repair', 'Skirt needs resizing and minor fabric tear fixing.', 'Skirts', 'skirt1.jpg', 'open');
 
 INSERT INTO offers (request_id, mender_id, price, message, status) VALUES
-(1, 3, 15.00, 'I can replace the zipper in 2 days.', 'pending'),
-(2, 3, 10.00, 'I can shorten the trousers by tomorrow.', 'accepted'),
-(3, 3, 12.50, 'I can fix the shoe sole with strong adhesive.', 'rejected');
+(1, 8, 18.00, 'I can stitch and patch the sleeve within 2 days.', 'accepted'),
+(2, 9, 25.00, 'I can replace the zipper and check the lining as well.', 'accepted'),
+(3, 10, 12.50, 'I can adjust the waist and hem the trousers by tomorrow.', 'pending'),
+(4, 8, 8.00, 'I can replace all missing buttons neatly.', 'accepted'),
+(5, 9, 22.00, 'I can repair the inner lining without changing the outer look.', 'pending'),
+(6, 10, 15.00, 'I can resize the skirt and repair the tear carefully.', 'rejected');

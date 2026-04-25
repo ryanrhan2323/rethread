@@ -2,8 +2,30 @@ doctype html
 html
   head
     title Users
+    link(rel="stylesheet", href="/style.css")
   body
-    h1 Users List
-    ul
-      each user in users
-        li #{user.name} - #{user.email} (#{user.role})
+    include nav
+
+    .container
+      h2= title
+
+      - const list = users || []
+
+      if list.length
+        .grid
+          - for (let i = 0; i < list.length; i++)
+            .card
+              if list[i].avatar
+                img(src=`/images/avatars/${list[i].avatar}` style="width:60px; height:60px; border-radius:50%; object-fit:cover; margin-bottom:10px;")
+
+              h3
+                a(href=`/profile/${list[i].user_id}`) #{list[i].name}
+
+              p
+                strong Role:
+                |  #{list[i].role}
+
+              if list[i].email
+                p.meta #{list[i].email}
+      else
+        .empty-state No users found

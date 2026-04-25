@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title Add Request
+    link(rel="stylesheet", href="/style.css")
+  body
+    include nav
+
+    .container
+      .card.form-card
+        h2 Create Repair Request
+
+        form(action="/add-request" method="POST")
+          label Title
+          input(type="text", name="title", required)
+
+          label Description
+          textarea(name="description", required)
+
+          label Category
+          input(type="text", name="category", required)
+
+          label Choose Image
+          select(name="image_url" id="imageSelect" onchange="previewImage()")
+            option(value="Jacket1.png") Jacket
+            option(value="Coat1.png") Coat
+            option(value="Trousers1.png") Trousers
+            option(value="Shirt1.png") Shirt
+            option(value="Jacket2.png") Jacket 2
+            option(value="Skirt1.png") Skirt
+
+          br
+          img#preview(src="/images/Jacket1.png" style="width:200px; border-radius:10px; margin-top:10px;")
+
+          br
+          button.button(type="submit") Submit
+
+    script.
+      function previewImage() {
+        const select = document.getElementById("imageSelect");
+        const preview = document.getElementById("preview");
+        preview.src = "/images/" + select.value;
+      }

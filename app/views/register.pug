@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Register
+    link(rel="stylesheet", href="/style.css")
+  body
+    include nav
+
+    .container
+      .card.form-card
+        h2 Register
+
+        form(action="/register" method="POST")
+          label(for="name") Name
+          input(type="text", name="name", id="name", placeholder="Name", required)
+
+          label(for="email") Email
+          input(type="email", name="email", id="email", placeholder="Email", required)
+
+          label(for="password") Password
+          input(type="password", name="password", id="password", placeholder="Password", required)
+
+          label(for="role") Role
+          select(name="role", id="role", required)
+            option(value="customer") Customer
+            option(value="mender") Mender
+
+          button.button(type="submit") Register
